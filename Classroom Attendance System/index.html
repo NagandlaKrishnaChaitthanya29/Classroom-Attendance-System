@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Classroom — Attendance</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+:root{--ink:#20392f;--muted:#87948c;--green:#438461;--green-dark:#2d6e4a;--pale:#eaf3ec;--line:#e7ede8;--bg:#f6f9f6;--white:#fff;--shadow:0 8px 28px #153d280a}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif}button,input,select,textarea{font:inherit}.hidden{display:none!important}.login-page{min-height:100vh;display:grid;place-items:center;padding:22px;background:radial-gradient(circle at 15% 15%,#e7f2e9,transparent 35%),radial-gradient(circle at 90% 90%,#eaf2ed,transparent 34%),var(--bg)}.login-card{width:min(410px,100%);padding:36px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 18px 55px #24432e12}.brand{display:flex;align-items:center;gap:9px;font:800 17px Manrope,sans-serif;color:var(--ink);text-decoration:none}.brand-mark{width:30px;height:30px;border-radius:9px;background:var(--green);display:grid;place-items:center;color:white;font-size:14px}.login-card>.brand{margin-bottom:35px}.eyebrow{font-size:9px;letter-spacing:1.5px;color:#7ca189;font-weight:700;margin:0 0 9px}.login-card h1,.page-heading h1{font:700 27px Manrope,sans-serif;letter-spacing:-.7px;margin:0 0 7px}.muted{font-size:12px;color:var(--muted);margin:0 0 22px}.login-card form{display:grid;gap:14px}.login-card label,.modal-fields label{display:grid;gap:7px;font-size:10px;color:#53655a;font-weight:600}.login-card input,.login-card select,.modal-fields input,.modal-fields select,.modal-fields textarea{width:100%;border:1px solid #e0e8e2;border-radius:8px;padding:11px 12px;background:white;color:var(--ink);outline:none;font-size:12px}.login-card input:focus,.login-card select:focus,.modal-fields input:focus,.modal-fields select:focus,.modal-fields textarea:focus{border-color:#7eaa8d;box-shadow:0 0 0 3px #43846114}.button{border:0;border-radius:8px;padding:10px 14px;font-size:11px;font-weight:600;cursor:pointer}.primary{background:var(--green);color:white;box-shadow:0 4px 10px #4384611f}.primary:hover{background:var(--green-dark)}.soft{background:#eef3ef;color:#52635a}.soft:hover{background:#e4ede6}.full{width:100%;padding:12px}.login-help{border-top:1px solid var(--line);margin:20px 0 0;padding-top:15px;font-size:10px;color:#8b9890;line-height:1.9}.error{color:#a34444;font-size:10px;min-height:12px;margin:0}.topbar{height:64px;background:white;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 max(calc((100vw - 1200px)/2),28px);position:sticky;top:0;z-index:5}.top-right{display:flex;align-items:center;gap:12px}.user-badge{font-size:10px;color:#728178}.layout{max-width:1200px;margin:30px auto;padding:0 25px;display:grid;grid-template-columns:205px minmax(0,1fr);gap:35px}.sidebar{min-height:calc(100vh - 100px);display:flex;flex-direction:column}.side-heading{font-size:9px;letter-spacing:1.5px;color:#9aa69e;font-weight:700;margin:9px 0 14px 10px}.nav-link{display:flex;gap:10px;align-items:center;padding:11px 10px;margin-bottom:4px;border-radius:8px;color:#77847c;text-decoration:none;font-size:11px;cursor:pointer}.nav-link.active,.nav-link:hover{background:var(--pale);color:#3d7955;font-weight:600}.sidebar-note{margin-top:auto;padding:14px;border-radius:11px;background:#edf5ef;color:#689176}.sidebar-note span{font-size:16px}.sidebar-note p{margin:8px 0 0;font-size:10px;color:#82938a;line-height:1.5}.content{min-width:0;padding:6px 0 40px}.page-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin:5px 0 23px}.page-heading h1{font-size:26px}.page-heading p{font-size:11px;color:var(--muted);margin:0}.heading-actions{display:flex;gap:7px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:18px}.stat-card,.panel{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}.stat-card{padding:15px 16px}.stat-card span{display:block;font-size:8px;letter-spacing:1px;font-weight:700;color:#95a198}.stat-card strong{display:block;margin-top:6px;font:700 22px Manrope,sans-serif}.panel{padding:19px;margin-bottom:14px}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:13px}.panel-head h2{font:700 14px Manrope,sans-serif;margin:0 0 4px}.panel-head p{font-size:10px;color:var(--muted);margin:0}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:10px}th{text-align:left;color:#94a098;font-size:8px;letter-spacing:.8px;text-transform:uppercase;padding:9px 8px;border-bottom:1px solid var(--line)}td{padding:10px 8px;border-bottom:1px solid #f0f3f0}tr:last-child td{border-bottom:0}.status{display:inline-block;border-radius:20px;padding:5px 8px;font-size:8px;font-weight:700;background:#edf3ee;color:#5d7664}.status.PRESENT,.status.REPLIED{background:#e8f4e9;color:#4b8054}.status.ABSENT,.status.PENDING{background:#fbf0e8;color:#a67442}.status.LATE{background:#eef2fa;color:#637da7}.status.EXCUSED{background:#f3eef8;color:#80649c}.row-button{border:0;border-radius:6px;background:#eff4f0;color:#4b795b;padding:6px 8px;font-size:9px;cursor:pointer}.empty{padding:26px;text-align:center;color:#98a39c;font-size:11px}.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.quick-card{padding:15px;border:1px solid var(--line);border-radius:10px;background:#fff;text-align:left;cursor:pointer;color:var(--ink)}.quick-card:hover{border-color:#b9d2c0;background:#fbfdfb}.quick-card strong{display:block;font:600 11px Manrope,sans-serif;margin-bottom:5px}.quick-card span{font-size:9px;color:var(--muted)}.filter{border:1px solid var(--line);border-radius:7px;padding:8px;font-size:10px;color:var(--ink);background:white}.toast{position:fixed;bottom:20px;right:22px;background:#244735;color:#fff;padding:11px 15px;border-radius:9px;box-shadow:var(--shadow);font-size:11px;opacity:0;transform:translateY(8px);pointer-events:none;transition:.2s;z-index:10}.toast.show{opacity:1;transform:translateY(0)}dialog{border:0;border-radius:15px;padding:0;width:min(500px,calc(100vw - 28px));box-shadow:0 20px 70px #17332442;color:var(--ink)}dialog::backdrop{background:#13281c75;backdrop-filter:blur(2px)}dialog form{padding:22px}.modal-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}.modal-head h2{font:700 18px Manrope,sans-serif;margin:0}.close{width:28px;height:28px;border:0;border-radius:7px;background:#eef3ef;color:#617169;font-size:19px;cursor:pointer}.modal-fields{display:grid;gap:13px;max-height:55vh;overflow:auto;padding:1px}.modal-fields textarea{min-height:84px;resize:vertical}.checklist{display:grid;gap:8px;max-height:170px;overflow:auto;padding:10px;border:1px solid var(--line);border-radius:8px}.check-option{display:flex;align-items:center;gap:8px;font-size:10px;color:#58695e}.check-option input{width:auto}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
+@media(max-width:780px){.layout{grid-template-columns:1fr;gap:12px;margin-top:18px}.sidebar{min-height:auto}.sidebar-note,.side-heading{display:none}#navigation{display:flex;overflow:auto;gap:5px}.nav-link{white-space:nowrap;padding:9px}.stats{grid-template-columns:repeat(2,1fr)}.topbar{padding:0 18px}.quick-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.layout{padding:0 14px}.page-heading{align-items:flex-start;flex-direction:column}.heading-actions{width:100%}.panel{padding:14px}.login-card{padding:26px}.quick-grid{grid-template-columns:1fr}.topbar{height:58px}}
+.filters{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.compact-stats{grid-template-columns:minmax(160px,1fr) auto;margin-top:-7px;margin-bottom:15px}.threshold-button{justify-self:end}.filtered-out{display:none}.nav-count{margin-left:auto;border-radius:20px;background:#e8f3e9;color:#477b53;padding:2px 6px;font-size:8px}.check-option span{color:#94a098;font-size:9px;margin-left:4px}
+
+</style>
+</head>
+<body>
+  <main id="loginView" class="login-page">
+    <section class="login-card">
+      <div class="brand"><span class="brand-mark">C</span><span>classroom</span></div>
+      <p class="eyebrow">ATTENDANCE PORTAL</p>
+      <h1>Welcome back</h1>
+      <p class="muted">Sign in to continue to your classroom.</p>
+      <form id="loginForm">
+        <label>Account type<select id="loginRole"><option value="teacher">Teacher</option><option value="student">Student</option><option value="admin">Admin</option></select></label>
+        <label id="usernameLabel">Username<input id="loginUsername" autocomplete="username" required placeholder="Your username" /></label>
+        <label>Password<input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Your password" /></label>
+        <p id="loginError" class="error"></p>
+        <button class="button primary full" type="submit">Sign in</button>
+      </form>
+      <p class="login-help">Demo admin: <b>admin</b> / <b>admin123</b><br>Demo teacher: <b>teacher</b> / <b>teach123</b></p>
+    </section>
+  </main>
+
+  <div id="appView" class="app hidden">
+    <header class="topbar"><a class="brand" href="#"><span class="brand-mark">C</span><span>classroom</span></a><div class="top-right"><span id="userBadge" class="user-badge"></span><button id="logoutButton" class="button soft">Log out</button></div></header>
+    <div class="layout">
+      <aside class="sidebar"><div class="side-heading">WORKSPACE</div><nav id="navigation"></nav><div class="sidebar-note"><span>✦</span><p>Showing up is the first step.</p></div></aside>
+      <main id="mainContent" class="content"></main>
+    </div>
+  </div>
+  <dialog id="modal"><form id="modalForm" method="dialog"><div class="modal-head"><div><p class="eyebrow" id="modalEyebrow">DETAILS</p><h2 id="modalTitle"></h2></div><button type="button" id="closeModal" class="close" aria-label="Close">×</button></div><div id="modalFields" class="modal-fields"></div><p id="modalError" class="error"></p><div class="modal-actions"><button type="button" id="cancelModal" class="button soft">Cancel</button><button type="submit" class="button primary">Save</button></div></form></dialog>
+  <div id="toast" class="toast" role="status"></div>
+  <script>
+const STORE = 'classroom-attendance-web-v1';
+const DEFAULT_ADMIN = { username: 'admin', password: 'admin123', role: 'admin' };
+const DEFAULT_TEACHER = { username: 'teacher', password: 'teach123', role: 'teacher', name: 'Default Teacher' };
+let db = readDb();
+db.threshold ??= 75;
+let user = null;
+let currentPage = 'dashboard';
+const $ = selector => document.querySelector(selector);
+
+window.addEventListener('error', event => {
+  const notice = $('#toast');
+  if (notice) toast(`App error: ${event.message || 'Something went wrong.'}`);
+});
+window.addEventListener('unhandledrejection', event => {
+  const message = event.reason?.message || 'Unexpected operation error.';
+  toast(`App error: ${message}`);
+});
+
+function readDb() {
+  try {
+    const value = JSON.parse(localStorage.getItem(STORE));
+    if (value && Array.isArray(value.students) && Array.isArray(value.courses) && Array.isArray(value.sessions) && Array.isArray(value.doubts) && Array.isArray(value.teachers)) {
+      value.ids ||= { student: 1, course: 1, session: 1, doubt: 1 };
+      for (const kind of ['student','course','session','doubt']) value.ids[kind] ||= 1;
+      value.courses.forEach(course => course.studentIds ||= []);
+      value.sessions.forEach(session => session.attendance ||= {});
+      return value;
+    }
+  } catch {}
+  return { students: [], courses: [], sessions: [], doubts: [], teachers: [], ids: { student: 1, course: 1, session: 1, doubt: 1 } };
+}
+function save() { localStorage.setItem(STORE, JSON.stringify(db)); }
+function next(kind) { return db.ids[kind]++; }
+function escapeHtml(value = '') { return String(value).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c])); }
+function dateLabel(value) { if (!value) return '—'; return new Date(`${value}T00:00:00`).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }); }
+function toast(text) { const node = $('#toast'); node.textContent = text; node.classList.add('show'); clearTimeout(toast.timer); toast.timer = setTimeout(() => node.classList.remove('show'), 2700); }
+function studentById(id) { return db.students.find(s => s.id === Number(id)); }
+function courseById(id) { return db.courses.find(c => c.id === Number(id)); }
+function sessionById(id) { return db.sessions.find(s => s.id === Number(id)); }
+function statusesForStudent(studentId) {
+  return db.sessions.filter(s => Object.hasOwn(s.attendance, String(studentId))).map(s => ({ session: s, status: s.attendance[String(studentId)] }));
+}
+function attendanceRate(studentId) {
+  const rows = statusesForStudent(studentId);
+  if (!rows.length) return 0;
+  return Math.round(rows.filter(r => ['PRESENT', 'LATE'].includes(r.status)).length * 1000 / rows.length) / 10;
+}
+
+$('#loginRole').addEventListener('change', () => {
+  $('#usernameLabel').firstChild.textContent = $('#loginRole').value === 'student' ? 'Student number' : 'Username';
+  $('#loginUsername').placeholder = $('#loginRole').value === 'student' ? 'Your student number' : 'Your username';
+});
+
+$('#loginForm').addEventListener('submit', event => {
+  event.preventDefault();
+  const role = $('#loginRole').value, username = $('#loginUsername').value.trim(), password = $('#loginPassword').value;
+  if (role === 'admin' && username === DEFAULT_ADMIN.username && password === DEFAULT_ADMIN.password) user = { role, username };
+  else if (role === 'teacher') {
+    if (username === DEFAULT_TEACHER.username && password === DEFAULT_TEACHER.password) user = { role, username, name: DEFAULT_TEACHER.name };
+    else { const t = db.teachers.find(item => item.username.toLowerCase() === username.toLowerCase() && item.password === password); if (t) user = { role, username: t.username, name: t.name }; }
+  } else if (role === 'student') {
+    const student = db.students.find(item => item.studentNumber.toLowerCase() === username.toLowerCase() && item.password === password);
+    if (student) user = { role, studentId: student.id, username: student.studentNumber, name: student.fullName };
+  }
+  if (!user) { $('#loginError').textContent = 'Those login details do not match an account.'; return; }
+  $('#loginError').textContent = '';
+  $('#loginView').classList.add('hidden'); $('#appView').classList.remove('hidden');
+  $('#userBadge').textContent = `${user.name || user.username} · ${user.role}`;
+  renderNavigation(); navigate(user.role === 'student' ? 'myAttendance' : 'dashboard');
+});
+
+$('#logoutButton').addEventListener('click', () => {
+  user = null; $('#loginPassword').value = ''; $('#appView').classList.add('hidden'); $('#loginView').classList.remove('hidden');
+});
+
+function renderNavigation() {
+  const pages = user.role === 'admin'
+    ? [['dashboard','Overview','⌂'],['teachers','Teachers','♙']]
+    : user.role === 'teacher'
+      ? [['dashboard','Overview','⌂'],['students','Students','♙'],['courses','Courses','▤'],['sessions','Class sessions','▦'],['doubts','Student doubts','?']]
+      : [['myAttendance','My attendance','✓'],['myDoubts','My doubts','?']];
+  $('#navigation').innerHTML = pages.map(([id,label,icon]) => {
+    const unread = id === 'myDoubts' ? db.doubts.filter(d => d.studentId === user.studentId && d.reply && !d.seenReply).length : 0;
+    return `<a class="nav-link" data-page="${id}"><span>${icon}</span>${label}${unread ? `<b class="nav-count">${unread}</b>` : ''}</a>`;
+  }).join('');
+}
+$('#navigation').addEventListener('click', event => { const link = event.target.closest('[data-page]'); if (link) navigate(link.dataset.page); });
+
+function navigate(page) {
+  currentPage = page;
+  document.querySelectorAll('.nav-link').forEach(link => link.classList.toggle('active', link.dataset.page === page));
+  const pages = { dashboard: renderDashboard, teachers: renderTeachers, students: renderStudents, courses: renderCourses, sessions: renderSessions, doubts: renderDoubts, myAttendance: renderMyAttendance, myDoubts: renderMyDoubts };
+  (pages[page] || renderDashboard)();
+}
+
+function heading(eyebrow, title, subtitle, action = '') {
+  return `<div class="page-heading"><div><p class="eyebrow">${eyebrow}</p><h1>${title}</h1><p>${subtitle}</p></div><div class="heading-actions">${action}</div></div>`;
+}
+function button(text, action, cls = 'primary') { return `<button class="button ${cls}" data-action="${action}">${text}</button>`; }
+function empty(text) { return `<div class="empty">${text}</div>`; }
+function stat(label, value) { return `<article class="stat-card"><span>${label}</span><strong>${value}</strong></article>`; }
+function table(headers, rows, emptyMessage) {
+  if (!rows.length) return empty(emptyMessage);
+  return `<div class="table-wrap"><table><thead><tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table></div>`;
+}
+
+function renderDashboard() {
+  if (user.role === 'admin') {
+    $('#mainContent').innerHTML = heading('ADMINISTRATION', 'Manage your team', 'Create teacher accounts for the classroom.', button('＋ Add teacher','addTeacher')) +
+      `<section class="stats">${stat('TEACHER ACCOUNTS', db.teachers.length + 1)}${stat('STUDENTS', db.students.length)}${stat('COURSES', db.courses.length)}${stat('CLASS SESSIONS', db.sessions.length)}</section>
+      <section class="panel"><div class="panel-head"><div><h2>Getting started</h2><p>Add teachers so they can manage classes and attendance.</p></div></div><div class="quick-grid"><button class="quick-card" data-action="addTeacher"><strong>Create teacher login</strong><span>Set a username and password for a teacher.</span></button><button class="quick-card" data-page="teachers"><strong>View teachers</strong><span>See accounts created for this app.</span></button></div></section>`;
+  } else {
+    const activeDoubts = db.doubts.filter(d => !d.reply && (d.assignedTo === user.username || (!d.assignedTo && user.username === 'teacher'))).length;
+    const today = new Date().toISOString().slice(0,10);
+    const todaysSessions = db.sessions.filter(s => s.date === today);
+    const lowStudents = db.students.filter(s => attendanceRate(s.id) < db.threshold && statusesForStudent(s.id).length > 0);
+    $('#mainContent').innerHTML = heading('TEACHER WORKSPACE', 'Classroom overview', 'Manage your students, courses, sessions, and questions.') +
+      `<section class="stats">${stat('STUDENTS', db.students.length)}${stat('COURSES', db.courses.length)}${stat('CLASS SESSIONS', db.sessions.length)}${stat('DOUBTS TO ANSWER', activeDoubts)}</section>
+      <section class="panel"><div class="panel-head"><div><h2>Quick actions</h2><p>Keep your classroom records up to date.</p></div></div><div class="quick-grid"><button class="quick-card" data-action="addStudent"><strong>Add student</strong><span>Create a student account and login.</span></button><button class="quick-card" data-action="addCourse"><strong>Create course</strong><span>Set up a course and enroll students.</span></button><button class="quick-card" data-action="addSession"><strong>Create class session</strong><span>Schedule a session for a course.</span></button><button class="quick-card" data-page="sessions"><strong>Take attendance</strong><span>Record present, late, absent, or excused.</span></button><button class="quick-card" data-page="doubts"><strong>Answer student doubts</strong><span>${activeDoubts} unanswered request${activeDoubts === 1 ? '' : 's'}.</span></button></div></section>
+      <section class="stats compact-stats">${stat('LOW ATTENDANCE', lowStudents.length)}<button class="button soft threshold-button" data-action="setThreshold">Alert threshold: ${db.threshold}% · Change</button></section>
+      <section class="panel"><div class="panel-head"><div><h2>Today’s classes</h2><p>${dateLabel(today)}</p></div><button class="row-button" data-action="addSession">＋ New session</button></div>${sessionRows(todaysSessions)}</section>
+      <section class="panel"><div class="panel-head"><div><h2>Attendance alerts</h2><p>Students below the ${db.threshold}% attendance threshold.</p></div></div>${lowAttendanceTable(lowStudents)}</section>
+      <section class="panel"><div class="panel-head"><div><h2>Recent sessions</h2><p>Latest class attendance sessions.</p></div></div>${recentSessionTable()}</section>`;
+  }
+}
+
+function lowAttendanceTable(students) {
+  const rows = students.map(s => `<tr><td>${escapeHtml(s.fullName)}</td><td>${escapeHtml(s.studentNumber)}</td><td>${db.courses.filter(c=>c.studentIds.includes(s.id)).map(c=>escapeHtml(c.code)).join(', ') || '—'}</td><td><span class="status ABSENT">${attendanceRate(s.id)}%</span></td><td>${statusesForStudent(s.id).length}</td></tr>`);
+  return table(['STUDENT','STUDENT NO.','COURSES','ATTENDANCE','RECORDED'], rows, 'No students are below the current threshold.');
+}
+
+function sessionRows(sessions) {
+  const rows = sessions.map(s => {
+    const course = courseById(s.courseId);
+    return `<tr><td>${escapeHtml(course?.code || '—')}</td><td>${escapeHtml(course?.name || 'Course')}</td><td>${escapeHtml(s.topic || '—')}</td><td>${Object.keys(s.attendance).length}</td><td><button class="row-button" data-mark="${s.id}">Take attendance</button></td></tr>`;
+  });
+  return table(['CODE','COURSE','TOPIC','MARKED','ACTION'], rows, 'No classes scheduled for today.');
+}
+
+function recentSessionTable() {
+  const rows = [...db.sessions].sort((a,b) => b.date.localeCompare(a.date)).slice(0,5).map(s => `<tr><td>${escapeHtml(courseById(s.courseId)?.code || '—')}</td><td>${escapeHtml(courseById(s.courseId)?.name || 'Course')}</td><td>${dateLabel(s.date)}</td><td>${escapeHtml(s.topic || '—')}</td></tr>`);
+  return table(['CODE','COURSE','DATE','TOPIC'], rows, 'No class sessions yet.');
+}
+
+function renderTeachers() {
+  const rows = [`<tr><td>teacher</td><td>Default Teacher</td><td><span class="status PRESENT">ACTIVE</span></td></tr>`, ...db.teachers.map(t => `<tr><td>${escapeHtml(t.username)}</td><td>${escapeHtml(t.name)}</td><td><span class="status PRESENT">ACTIVE</span></td></tr>`)];
+  $('#mainContent').innerHTML = heading('ADMINISTRATION', 'Teacher accounts', 'Create and review teacher logins.', button('＋ Add teacher','addTeacher')) +
+    `<section class="panel"><div class="panel-head"><div><h2>Accounts</h2><p>Teachers can manage students, courses, sessions, and attendance.</p></div></div>${table(['USERNAME','TEACHER','STATUS'], rows, 'No teacher accounts.')}</section>`;
+}
+
+function renderStudents() {
+  const rows = db.students.map(s => `<tr><td>${escapeHtml(s.studentNumber)}</td><td>${escapeHtml(s.fullName)}</td><td>${escapeHtml(s.email || '—')}</td><td>${db.courses.filter(c => c.studentIds.includes(s.id)).length}</td><td>${attendanceRate(s.id)}%</td></tr>`);
+  $('#mainContent').innerHTML = heading('ROSTER', 'Students', 'Create student accounts and track attendance.', button('＋ Add student','addStudent')) +
+    `<section class="panel"><div class="panel-head"><div><h2>Student roster</h2><p>${db.students.length} student account${db.students.length === 1 ? '' : 's'}</p></div><input class="filter" id="studentSearch" placeholder="Search students…"></div>${table(['STUDENT NO.','NAME','EMAIL','COURSES','ATTENDANCE'], rows, 'No students yet. Add a student to get started.')}</section>`;
+  attachSearch('studentSearch');
+}
+
+function renderCourses() {
+  const rows = db.courses.map(c => `<tr><td>${escapeHtml(c.code)}</td><td>${escapeHtml(c.name)}</td><td>${escapeHtml(c.instructor || '—')}</td><td>${c.studentIds.length}</td><td>${courseAttendanceRate(c)}%</td><td><button class="row-button" data-course-report="${c.id}">Report</button> <button class="row-button" data-edit-course="${c.id}">Manage</button></td></tr>`);
+  $('#mainContent').innerHTML = heading('COURSE CATALOG', 'Courses', 'Organize students into classes.', button('＋ Add course','addCourse')) +
+    `<section class="panel"><div class="panel-head"><div><h2>Your courses</h2><p>${db.courses.length} course${db.courses.length === 1 ? '' : 's'}</p></div><input class="filter" id="courseSearch" placeholder="Search courses…"></div>${table(['CODE','COURSE','INSTRUCTOR','STUDENTS','AVG. ATTENDANCE','ACTIONS'], rows, 'No courses yet.')}</section>`;
+  attachSearch('courseSearch');
+}
+
+function courseAttendanceRate(course) {
+  const relevant = db.sessions.filter(s => s.courseId === course.id);
+  let marked = 0, attended = 0;
+  for (const session of relevant) for (const studentId of course.studentIds) {
+    const status = session.attendance[studentId];
+    if (status) { marked++; if (['PRESENT','LATE'].includes(status)) attended++; }
+  }
+  return marked ? Math.round(attended * 1000 / marked) / 10 : 0;
+}
+
+function renderSessions() {
+  const rows = [...db.sessions].sort((a,b) => b.date.localeCompare(a.date)).map(s => {
+    const course = courseById(s.courseId), marked = Object.keys(s.attendance).length;
+    return `<tr><td>${escapeHtml(course?.code || '—')}</td><td>${escapeHtml(course?.name || 'Course')}</td><td>${dateLabel(s.date)}</td><td>${escapeHtml(s.topic || '—')}</td><td>${marked}</td><td><button class="row-button" data-mark="${s.id}">Mark / edit</button> <button class="row-button" data-view-session="${s.id}">View</button></td></tr>`;
+  });
+  const courses = db.courses.map(c=>`<option value="${c.id}">${escapeHtml(c.code)}</option>`).join('');
+  $('#mainContent').innerHTML = heading('ATTENDANCE', 'Class sessions', 'Create sessions and record each student’s status.', `${button('Export CSV','exportCsv','soft')}${button('＋ New session','addSession')}`) +
+    `<section class="panel"><div class="panel-head"><div><h2>Sessions</h2><p>Attendance can be updated any time.</p></div><div class="filters"><input class="filter" id="sessionSearch" placeholder="Search sessions…"><select class="filter" id="sessionCourseFilter"><option value="">All courses</option>${courses}</select><input class="filter" id="sessionDateFilter" type="date" title="Filter by date"></div></div>${table(['COURSE','NAME','DATE','TOPIC','MARKED','ACTIONS'], rows, 'Create a session to start recording attendance.')}</section>`;
+  attachSearch('sessionSearch');
+  ['sessionCourseFilter','sessionDateFilter'].forEach(id => document.getElementById(id).addEventListener('input', filterSessions));
+}
+
+function attachSearch(id) {
+  const input = document.getElementById(id); if (!input) return;
+  input.addEventListener('input', () => {
+    const query = input.value.toLowerCase();
+    document.querySelectorAll('#mainContent tbody tr').forEach(row => row.classList.toggle('filtered-out', !row.textContent.toLowerCase().includes(query)));
+  });
+}
+
+function filterSessions() {
+  const query = $('#sessionSearch').value.toLowerCase(), course = $('#sessionCourseFilter').value, date = $('#sessionDateFilter').value;
+  [...db.sessions].sort((a,b) => b.date.localeCompare(a.date)).forEach((session, index) => {
+    const row = document.querySelectorAll('#mainContent tbody tr')[index]; if (!row) return;
+    row.classList.toggle('filtered-out', !row.textContent.toLowerCase().includes(query) || (course && String(session.courseId) !== course) || (date && session.date !== date));
+  });
+}
+
+function renderDoubts() {
+  const assigned = db.doubts.filter(d => d.assignedTo === user.username || (!d.assignedTo && user.username === 'teacher'));
+  const rows = [...assigned].sort((a,b) => b.createdAt.localeCompare(a.createdAt)).map(d => `<tr><td>${escapeHtml(studentById(d.studentId)?.fullName || 'Unknown')}</td><td>${escapeHtml(d.message)}</td><td>${new Date(d.createdAt).toLocaleDateString()}</td><td><span class="status ${d.reply ? 'REPLIED' : 'PENDING'}">${d.reply ? 'REPLIED' : 'PENDING'}</span></td><td><button class="row-button" data-reply="${d.id}">${d.reply ? 'View / edit reply' : 'Reply'}</button></td></tr>`);
+  $('#mainContent').innerHTML = heading('STUDENT SUPPORT', 'Doubt requests', 'Read questions addressed to your teacher account and send replies.') +
+    `<section class="panel"><div class="panel-head"><div><h2>Student questions</h2><p>${assigned.filter(d => !d.reply).length} awaiting a reply</p></div></div>${table(['STUDENT','QUESTION','DATE','STATUS','ACTION'], rows, 'No doubt requests have been assigned to you.')}</section>`;
+}
+
+function renderMyAttendance() {
+  const rows = statusesForStudent(user.studentId).sort((a,b) => b.session.date.localeCompare(a.session.date)).map(({session,status}) => `<tr><td>${dateLabel(session.date)}</td><td>${escapeHtml(courseById(session.courseId)?.code || '—')}</td><td>${escapeHtml(courseById(session.courseId)?.name || 'Course')}</td><td>${escapeHtml(session.topic || '—')}</td><td><span class="status ${status}">${status}</span></td></tr>`);
+  $('#mainContent').innerHTML = heading('STUDENT PORTAL', 'My attendance', 'View your saved attendance records.') +
+    `<section class="stats">${stat('ATTENDANCE RATE', `${attendanceRate(user.studentId)}%`)}${stat('RECORDED SESSIONS', rows.length)}${stat('COURSES', db.courses.filter(c => c.studentIds.includes(user.studentId)).length)}${stat('DOUBT REQUESTS', db.doubts.filter(d => d.studentId === user.studentId).length)}</section>
+    <section class="panel"><div class="panel-head"><div><h2>Attendance history</h2><p>Present and late count toward your attendance rate.</p></div></div>${table(['DATE','CODE','COURSE','TOPIC','STATUS'], rows, 'No attendance records have been entered for you yet.')}</section>`;
+}
+
+function renderMyDoubts() {
+  const myDoubts = db.doubts.filter(d => d.studentId === user.studentId);
+  myDoubts.forEach(d => { if (d.reply) d.seenReply = true; });
+  save(); renderNavigation(); document.querySelector(`[data-page="${currentPage}"]`)?.classList.add('active');
+  const rows = myDoubts.sort((a,b) => b.createdAt.localeCompare(a.createdAt)).map(d => `<tr><td>${new Date(d.createdAt).toLocaleString()}</td><td>${escapeHtml(d.assignedTeacherName || 'Teacher')}</td><td>${escapeHtml(d.message)}</td><td>${escapeHtml(d.reply || 'Waiting for your teacher to reply')}</td></tr>`);
+  $('#mainContent').innerHTML = heading('STUDENT PORTAL', 'My doubt requests', 'Ask your teacher a question and check for a reply.', button('＋ Raise a doubt','raiseDoubt')) +
+    `<section class="panel"><div class="panel-head"><div><h2>Your questions</h2><p>Only you and the selected teacher can view these in this browser app.</p></div></div>${table(['SUBMITTED','TO TEACHER','YOUR QUESTION','TEACHER REPLY'], rows, 'You have not submitted any doubts yet.')}</section>`;
+}
+
+function modal(title, fields, onSave) {
+  $('#modalTitle').textContent = title; $('#modalError').textContent = '';
+  $('#modalFields').innerHTML = fields;
+  const dialog = $('#modal'), form = $('#modalForm');
+  dialog.showModal();
+  const submit = event => {
+    event.preventDefault();
+    try { const result = onSave(new FormData(form), form); if (result !== false) { dialog.close(); navigate(typeof result === 'string' ? result : currentPage); } }
+    catch (error) { $('#modalError').textContent = error.message; }
+  };
+  form.onsubmit = submit;
+}
+function field(label,name,placeholder='',type='text',required=true) { return `<label>${label}<input name="${name}" type="${type}" placeholder="${placeholder}" ${required?'required':''}></label>`; }
+
+function addTeacher() {
+  modal('Create teacher account', field('Teacher name','name','Full name') + field('Username','username','Login username') + field('Password','password','Set a password','password'), data => {
+    const name=data.get('name').trim(), username=data.get('username').trim();
+    if (username.toLowerCase() === 'teacher' || db.teachers.some(t => t.username.toLowerCase() === username.toLowerCase())) throw Error('That username already exists.');
+    db.teachers.push({ id: Date.now(), name, username, password: data.get('password') }); save(); toast('Teacher account created.'); return 'teachers';
+  });
+}
+function addStudent() {
+  modal('Add student', field('Student number','studentNumber','e.g. STU-1042') + field('Full name','fullName','Student name') + field('Email','email','Optional email','email',false) + field('Student password','password','Set a login password','password'), data => {
+    const studentNumber=data.get('studentNumber').trim();
+    if (db.students.some(s => s.studentNumber.toLowerCase() === studentNumber.toLowerCase())) throw Error('That student number already exists.');
+    db.students.push({ id: next('student'), studentNumber, fullName: data.get('fullName').trim(), email: data.get('email').trim(), password: data.get('password') }); save(); toast('Student added.'); return 'students';
+  });
+}
+function addCourse(existing = null) {
+  const checked = new Set(existing?.studentIds || []);
+  const options = db.students.length ? db.students.map(s => `<label class="check-option"><input type="checkbox" name="studentIds" value="${s.id}" ${checked.has(s.id)?'checked':''}>${escapeHtml(s.fullName)} <span>${escapeHtml(s.studentNumber)}</span></label>`).join('') : '<span class="muted">Add students first.</span>';
+  const fields = field('Course code','code','e.g. CS-101') + field('Course name','name','Course name') + field('Instructor','instructor','Optional','text',false) + `<label>Enroll students<div class="checklist">${options}</div></label>`;
+  modal(existing ? 'Manage course' : 'Add course', fields, data => {
+    const code=data.get('code').trim();
+    if (db.courses.some(c => c.id !== existing?.id && c.code.toLowerCase() === code.toLowerCase())) throw Error('That course code already exists.');
+    const studentIds = [...$('#modalFields').querySelectorAll('[name="studentIds"]:checked')].map(i => Number(i.value));
+    if (existing) Object.assign(existing, { code, name: data.get('name').trim(), instructor: data.get('instructor').trim(), studentIds });
+    else db.courses.push({ id: next('course'), code, name: data.get('name').trim(), instructor: data.get('instructor').trim(), studentIds });
+    save(); toast(existing ? 'Course updated.' : 'Course added.'); return 'courses';
+  });
+  if (existing) {
+    const form = $('#modalForm'); form.elements.code.value = existing.code; form.elements.name.value = existing.name; form.elements.instructor.value = existing.instructor || '';
+  }
+}
+function addSession() {
+  if (!db.courses.length) { toast('Add a course first.'); return; }
+  const options = db.courses.map(c => `<option value="${c.id}">${escapeHtml(c.code)} — ${escapeHtml(c.name)}</option>`).join('');
+  const fields = `<label>Course<select name="courseId" required>${options}</select></label>` + field('Date','date','', 'date') + field('Start time','time','', 'time',false) + field('Topic','topic','Lesson topic','text',false);
+  modal('Create class session', fields, data => {
+    db.sessions.push({ id: next('session'), courseId: Number(data.get('courseId')), date: data.get('date'), time: data.get('time'), topic: data.get('topic').trim(), attendance: {} });
+    save(); toast('Class session created.'); return 'sessions';
+  });
+  $('#modalForm').elements.date.value = new Date().toISOString().slice(0,10);
+}
+function markAttendance(id) {
+  const session = sessionById(id), course = courseById(session.courseId);
+  const enrolled = db.students.filter(s => course.studentIds.includes(s.id));
+  if (!enrolled.length) { toast('Enroll students in this course first.'); return; }
+  const fields = enrolled.map(s => `<label>${escapeHtml(s.fullName)}<select name="student-${s.id}">${['PRESENT','LATE','ABSENT','EXCUSED'].map(status => `<option ${session.attendance[s.id] === status ? 'selected':''}>${status}</option>`).join('')}</select></label>`).join('');
+  modal(`Attendance · ${course.code} · ${dateLabel(session.date)}`, fields, () => {
+    for (const student of enrolled) session.attendance[student.id] = $('#modalForm').elements[`student-${student.id}`].value;
+    save(); toast('Attendance saved.'); return 'sessions';
+  });
+}
+function viewSession(id) {
+  const session = sessionById(id), course = courseById(session.courseId);
+  const rows = db.students.filter(s => course.studentIds.includes(s.id)).map(s => `<tr><td>${escapeHtml(s.fullName)}</td><td>${escapeHtml(s.studentNumber)}</td><td>${session.attendance[s.id] ? `<span class="status ${session.attendance[s.id]}">${session.attendance[s.id]}</span>` : 'Not marked'}</td></tr>`);
+  $('#modalTitle').textContent = `${course.code} · ${dateLabel(session.date)}`;
+  $('#modalFields').innerHTML = table(['STUDENT','STUDENT NO.','STATUS'], rows, 'No students enrolled.');
+  $('#modalError').textContent=''; $('#modalForm').onsubmit=e=>e.preventDefault(); $('#modal').showModal();
+}
+function raiseDoubt() {
+  const teachers = [DEFAULT_TEACHER, ...db.teachers];
+  const teacherOptions = teachers.map(t => `<option value="${escapeHtml(t.username)}">${escapeHtml(t.name)} (${escapeHtml(t.username)})</option>`).join('');
+  modal('Raise a doubt', `<label>Choose a teacher<select name="teacherUsername" required>${teacherOptions}</select></label><label>Your question<textarea name="message" required maxlength="1000" placeholder="Write your question for the teacher..."></textarea></label>`, data => {
+    const teacher = teachers.find(t => t.username === data.get('teacherUsername'));
+    db.doubts.push({ id: next('doubt'), studentId: user.studentId, assignedTo: teacher.username, assignedTeacherName: teacher.name, message: data.get('message').trim(), reply: '', createdAt: new Date().toISOString() });
+    save(); toast('Your doubt was sent to the teacher.'); return 'myDoubts';
+  });
+}
+function replyToDoubt(id) {
+  const doubt = db.doubts.find(d => d.id === Number(id));
+  modal('Reply to student doubt', `<label>Student question<textarea disabled>${escapeHtml(doubt.message)}</textarea></label><label>Your reply<textarea name="reply" required>${escapeHtml(doubt.reply || '')}</textarea></label>`, data => {
+    doubt.reply = data.get('reply').trim(); doubt.repliedAt = new Date().toISOString(); save(); toast('Reply saved.'); return 'doubts';
+  });
+}
+
+function setAttendanceThreshold() {
+  modal('Attendance alert threshold', `<label>Alert students below this percentage<input name="threshold" type="number" min="1" max="100" value="${db.threshold}" required></label>`, data => {
+    db.threshold = Number(data.get('threshold')); save(); toast(`Attendance alert threshold set to ${db.threshold}%.`);
+  });
+}
+
+function exportCsv() {
+  const rows = [['Student number','Student name','Course code','Course name','Session date','Topic','Attendance']];
+  for (const session of db.sessions) {
+    const course = courseById(session.courseId);
+    for (const student of db.students.filter(s => course?.studentIds.includes(s.id))) {
+      rows.push([student.studentNumber, student.fullName, course.code, course.name, session.date, session.topic || '', session.attendance[student.id] || 'NOT MARKED']);
+    }
+  }
+  const csv = rows.map(row => row.map(value => `"${String(value).replaceAll('"','""')}"`).join(',')).join('\r\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob); const link = document.createElement('a');
+  link.href = url; link.download = 'classroom-attendance.csv'; link.click(); URL.revokeObjectURL(url); toast('Attendance CSV downloaded.');
+}
+
+function courseReport(id) {
+  const course = courseById(id); if (!course) return;
+  const sessions = db.sessions.filter(s => s.courseId === course.id).sort((a,b) => b.date.localeCompare(a.date));
+  const rows = sessions.map(session => {
+    const marked = course.studentIds.map(studentId => session.attendance[studentId]).filter(Boolean);
+    const present = marked.filter(status => status === 'PRESENT' || status === 'LATE').length;
+    const rate = marked.length ? Math.round(present * 1000 / marked.length) / 10 : 0;
+    return `<tr><td>${dateLabel(session.date)}</td><td>${escapeHtml(session.topic || '—')}</td><td>${marked.length}/${course.studentIds.length}</td><td>${present}</td><td>${marked.filter(status=>status==='ABSENT').length}</td><td>${rate}%</td></tr>`;
+  });
+  const average = courseAttendanceRate(course);
+  $('#modalTitle').textContent = `${course.code} · Attendance report`;
+  $('#modalFields').innerHTML = `<p class="muted">${escapeHtml(course.name)} · ${course.studentIds.length} enrolled · Average attendance ${average}%</p>` + table(['DATE','TOPIC','MARKED','PRESENT / LATE','ABSENT','RATE'], rows, 'No sessions for this course yet.');
+  $('#modalError').textContent=''; $('#modalForm').onsubmit=e=>e.preventDefault(); $('#modal').showModal();
+}
+
+document.addEventListener('click', event => {
+  const page = event.target.closest('[data-page]'); if (page) { navigate(page.dataset.page); return; }
+  const action = event.target.closest('[data-action]');
+  if (action) {
+    const actions = { addTeacher, addStudent, addCourse:()=>addCourse(), addSession, raiseDoubt, setThreshold: setAttendanceThreshold, exportCsv };
+    actions[action.dataset.action]?.(); return;
+  }
+  const edit = event.target.closest('[data-edit-course]'); if (edit) { addCourse(courseById(edit.dataset.editCourse)); return; }
+  const report = event.target.closest('[data-course-report]'); if (report) { courseReport(report.dataset.courseReport); return; }
+  const mark = event.target.closest('[data-mark]'); if (mark) { markAttendance(mark.dataset.mark); return; }
+  const view = event.target.closest('[data-view-session]'); if (view) { viewSession(view.dataset.viewSession); return; }
+  const reply = event.target.closest('[data-reply]'); if (reply) replyToDoubt(reply.dataset.reply);
+});
+$('#closeModal').addEventListener('click', () => $('#modal').close());
+$('#cancelModal').addEventListener('click', () => $('#modal').close());
+
+</script>
+  <script>
+    // Force-sync frontend state with Tomcat (/api/state) -> MySQL
+    (function() {
+      const API_URL = "http://localhost:8080/api/state";
+
+      // 1. Whenever the frontend saves state to localStorage, automatically PUT it to MySQL
+      const originalSetItem = localStorage.setItem.bind(localStorage);
+      localStorage.setItem = function(key, value) {
+        originalSetItem(key, value);
+        if (value && value.trim().startsWith("{") && value.includes('"students"')) {
+          fetch(API_URL, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: value
+          })
+                  .then(r => r.json())
+                  .then(res => console.log("Synced to MySQL:", res))
+                  .catch(err => console.error("MySQL Sync Error:", err));
+        }
+      };
+
+      // 2. Also push current localStorage state immediately when page loads
+      window.addEventListener("load", () => {
+        for (let i = 0; i < localStorage.length; i++) {
+          const k = localStorage.key(i);
+          const v = localStorage.getItem(k);
+          if (v && v.trim().startsWith("{") && v.includes('"students"')) {
+            fetch(API_URL, {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: v
+            }).catch(err => console.error("Initial MySQL Sync Error:", err));
+          }
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
