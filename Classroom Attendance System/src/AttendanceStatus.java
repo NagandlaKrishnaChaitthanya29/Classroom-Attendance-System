@@ -1,0 +1,1 @@
+enum AttendanceStatus { PRESENT, LATE, ABSENT, EXCUSED }
